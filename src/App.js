@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import Home from "./pages/Home";
+import Login from "./auth/Login";
+import Register from "./auth/Register";
+import Dashboard from "./pages/Dashboard";
 
-function App() {
+const App = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("authToken");
+    const currentPath = window.location.pathname;
+
+    // Jika pengguna mencoba mengakses dashboard tanpa token, arahkan ke login
+    if (currentPath === "/dashboard" && !token) {
+      navigate("/login");
+    }
+  }, [navigate]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/dashboard" element={<Dashboard />} />
+    </Routes>
   );
-}
+};
 
 export default App;
