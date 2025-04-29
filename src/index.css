@@ -228,3 +228,16 @@ button:disabled {
 .nav-text span:hover {
   text-decoration: underline;
 }
+
+/* Ubah warna ikon current location menjadi hijau */
+.current-location-icon {
+  filter: hue-rotate(120deg); /* Hijau */
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+.leaflet-popup-content {
+  margin: 10px;
+}
